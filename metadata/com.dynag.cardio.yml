@@ -1,0 +1,24 @@
+Categories:
+  - Health & Fitness
+License: Proprietary
+AuthorName: Dynag
+AuthorEmail: bot@dynag.co
+SourceCode: https://github.com/hemge-dynag/memomind-cardio
+IssueTracker: https://github.com/hemge-dynag/memomind-cardio/issues
+RepoType: git
+Repo: https://github.com/hemge-dynag/memomind-cardio
+
+AutoName: MemoMind Cardio
+
+Builds:
+  - versionName: 1.2.17
+    versionCode: 20
+    commit: v1.2.17
+    subdir: app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 1.2.17
+CurrentVersionCode: 20

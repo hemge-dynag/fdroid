@@ -1,0 +1,11 @@
+repo_url: https://raw.githubusercontent.com/hemge-dynag/fdroid/gh-pages/repo
+repo_name: MemoMind
+repo_icon: com.dynag.cardio.48.png
+repo_description: >-
+  Depot F-Droid MemoMind : applications Android natives (APK signes) qui
+  accompagnent les lunettes MemoMind. Premiere app : Cardio (BPM, temps,
+  vitesse/distance sur les lunettes).
+archive_older: 0
+keystore: keystore.jks
+repo_keyalias: fdroid
+keydname: CN=MemoMind F-Droid, OU=Dynag, O=Dynag, L=Paris, ST=Ile-de-France, C=FR
