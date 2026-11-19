@@ -29,12 +29,12 @@ fdroidserver installe.
 ```
 fdroid/
 ├── config.yml            configuration fdroidserver
-├── keystore.jks          cle de signature du depot (A creer, voir plus bas)
+├── keystore.jks          cle de signature du depot (committee sur demande de Dynag)
 ├── metadata/
 │   └── com.dynag.cardio.yml
 └── repo/
     ├── index-v1.json     index (genere)
-    ├── index-v1.jar      index signe (a generer avec fdroid update)
+    ├── index-v1.jar      index signe (apksigner, cle fdroid)
     ├── com.dynag.cardio.48.png / .72.png
     └── memomind-cardio-1.2.17.apk
 ```
@@ -45,18 +45,24 @@ fdroid/
 python3 tools/fdroid/gen_index.py fdroid/repo      # index-v1.json
 ```
 
-## Creer la cle du depot (une seule fois)
+## Cle du depot
 
-```bash
-cd fdroid
-keytool -genkey -v -keystore keystore.jks -alias fdroid -keyalg RSA \
-        -keysize 4096 -validity 10000 -storepass <motdepasse> \
-        -dname "CN=MemoMind F-Droid, OU=Dynag, O=Dynag, C=FR"
-keytool -list -v -keystore keystore.jks -alias fdroid | grep SHA256
+Creee le 19 nov. 2026 (`keystore.jks`, alias `fdroid`, RSA 4096, 10 000 jours),
+empreinte dans `keystore.fingerprint` :
+
+```
+SHA-256: 0E:7A:8A:A3:6F:33:07:95:8F:91:80:2E:9C:BA:27:90:60:8B:EE:2D:83:A2:E5:CF:01:55:C9:03:7A:67:9E:5F
 ```
 
-Puis `fdroid update` (fdroidserver) signe `index-v1.jar` avec cette cle. Ne
-jamais committer `keystore.jks` ni son mot de passe.
+Le fichier est versionne dans ce depot prive a la demande de Dynag (pas de
+perte de cle). Mot de passe du store : voir avec Dynag (non ecrit ici).
+
+Signature de l'index (sans fdroidserver) :
+
+```bash
+apksigner sign --ks keystore.jks --ks-key-alias fdroid \
+               --min-sdk-version 21 --out repo/index-v1.jar index-unsigned.jar
+```
 
 ## Ajouter une app
 
