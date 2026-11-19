@@ -8,6 +8,7 @@ metadata/<package>.yml. L'index est ecrit dans fdroid/repo/index-v1.json.
 """
 import hashlib, json, pathlib, sys
 
+FDROID = pathlib.Path(__file__).resolve().parents[2] / 'repos' / 'memomind-cardio-android'
 
 APPS = {
     'com.dynag.cardio': {
@@ -59,10 +60,10 @@ def main(repo: pathlib.Path) -> int:
     index = {
         'repo': {
             'timestamp': max(p['added'] for p in packages),
-            'version': 20001,
+            'version': 20002,
             'name': 'MemoMind',
             'icon': 'com.dynag.cardio.48.png',
-            'address': 'https://raw.githubusercontent.com/hemge-dynag/fdroid/gh-pages/repo',
+            'address': 'https://hemge-dynag.github.io/fdroid/fdroid/repo',
             'description': 'Depot F-Droid MemoMind (apps APK natives, ex. Cardio).',
             'mirrors': [],
         },

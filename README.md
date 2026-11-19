@@ -1,12 +1,12 @@
 # Depot F-Droid MemoMind
 
 Depot F-Droid heberge sur la branche `gh-pages` : la page publique est
-`https://raw.githubusercontent.com/hemge-dynag/fdroid/gh-pages/repo`.
+`https://hemge-dynag.github.io/fdroid/fdroid/repo`.
 
 ## Ajouter le depot dans F-Droid
 
 1. Ouvrir F-Droid > Parametres > Depots.
-2. « + » puis coller l'URL `https://raw.githubusercontent.com/hemge-dynag/fdroid/gh-pages/repo`
+2. « + » puis coller l'URL `https://hemge-dynag.github.io/fdroid/fdroid/repo`
    (empreinte de signature : voir `keystore.fingerprint`).
 3. Rafraichir : l'app « MemoMind Cardio » apparait.
 
@@ -29,7 +29,7 @@ fdroidserver installe.
 ```
 fdroid/
 ├── config.yml            configuration fdroidserver
-├── keystore.jks          cle de signature du depot (committee sur demande de Dynag)
+├── keystore.jks          cle de signature du depot
 ├── metadata/
 │   └── com.dynag.cardio.yml
 └── repo/
@@ -60,9 +60,11 @@ perte de cle). Mot de passe du store : voir avec Dynag (non ecrit ici).
 Signature de l'index (sans fdroidserver) :
 
 ```bash
-apksigner sign --ks keystore.jks --ks-key-alias fdroid \
-               --min-sdk-version 21 --out repo/index-v1.jar index-unsigned.jar
+python3 tools/fdroid/sign_index.py fdroid/repo keystore.jks <storepass>
 ```
+
+(equivalent `jarsigner -sigalg SHA256withRSA -digestalg SHA-256` ; pas besoin
+d'Android SDK).
 
 ## Ajouter une app
 
