@@ -1,10 +1,10 @@
 {
  "repo": {
-  "timestamp": 1795086380,
-  "version": 20001,
+  "timestamp": 1795100908,
+  "version": 20002,
   "name": "MemoMind",
   "icon": "com.dynag.cardio.48.png",
-  "address": "https://raw.githubusercontent.com/hemge-dynag/fdroid/gh-pages/repo",
+  "address": "https://hemge-dynag.github.io/fdroid/fdroid/repo",
   "description": "Depot F-Droid MemoMind (apps APK natives, ex. Cardio).",
   "mirrors": []
  },
@@ -18,7 +18,7 @@
    "name": "MemoMind Cardio",
    "summary": "Cardio BPM on MemoMind glasses",
    "icon": "com.dynag.cardio.48.png",
-   "license": "MIT",
+   "license": "Proprietary",
    "categories": [
     "Health & Fitness"
    ],
@@ -44,7 +44,7 @@
    "minSdkVersion": 26,
    "targetSdkVersion": 34,
    "nativecode": [],
-   "added": 1795086380
+   "added": 1795100908
   }
  ]
 }
