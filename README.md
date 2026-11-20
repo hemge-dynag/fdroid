@@ -1,12 +1,12 @@
 # Depot F-Droid MemoMind
 
 Depot F-Droid heberge sur la branche `gh-pages` : la page publique est
-`https://hemge-dynag.github.io/fdroid/fdroid/repo`.
+`https://hemge-dynag.github.io/fdroid/repo/`.
 
 ## Ajouter le depot dans F-Droid
 
 1. Ouvrir F-Droid > Parametres > Depots.
-2. « + » puis coller l'URL `https://hemge-dynag.github.io/fdroid/fdroid/repo`
+2. « + » puis coller l'URL `https://hemge-dynag.github.io/fdroid/repo/`
    (empreinte de signature : voir `keystore.fingerprint`).
 3. Rafraichir : l'app « MemoMind Cardio » apparait.
 

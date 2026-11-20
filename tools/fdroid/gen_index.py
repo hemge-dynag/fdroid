@@ -32,14 +32,17 @@ def main(repo: pathlib.Path) -> int:
         newest = max(meta['apks'], key=lambda a: a[1])
         apps.append({
             'packageName': pkg,
-            'name': meta['name'],
-            'summary': meta['summary'],
             'icon': f'{pkg}.48.png',
             'license': meta['license'],
             'categories': meta['categories'],
             'sourceCode': meta['sourceCode'],
-            'suggestedVersionCode': newest[1],
-            'localized': {'fr': {'summary': meta['fr'][0], 'description': meta['fr'][1]}},
+            'suggestedVersionCode': str(newest[1]),
+            'suggestedVersionName': newest[0],
+            'localized': {
+                'en': {'name': meta['name'], 'summary': meta['summary']},
+                'fr': {'name': meta['name'], 'summary': meta['fr'][0],
+                       'description': meta['fr'][1]},
+            },
         })
         for version_name, code, apk_name, min_sdk, target_sdk in meta['apks']:
             apk = repo / apk_name
@@ -55,21 +58,28 @@ def main(repo: pathlib.Path) -> int:
                 'minSdkVersion': min_sdk,
                 'targetSdkVersion': target_sdk,
                 'nativecode': [],
-                'added': int(apk.stat().st_mtime),
+                'added': int(apk.stat().st_mtime * 1000),
             })
+    packages_by_name = {}
+    for p in packages:
+        packages_by_name.setdefault(p['packageName'], []).append(p)
+    ts_ms = max(p['added'] for p in packages)
+    for app in apps:
+        app['added'] = ts_ms
+        app['lastUpdated'] = ts_ms
     index = {
         'repo': {
-            'timestamp': max(p['added'] for p in packages),
-            'version': 20002,
+            'timestamp': ts_ms,
+            'version': 1,
             'name': 'MemoMind',
             'icon': 'com.dynag.cardio.48.png',
-            'address': 'https://hemge-dynag.github.io/fdroid/fdroid/repo',
+            'address': 'https://hemge-dynag.github.io/fdroid/repo/',
+            'mirrors': ['https://hemge-dynag.github.io/fdroid/fdroid/repo'],
             'description': 'Depot F-Droid MemoMind (apps APK natives, ex. Cardio).',
-            'mirrors': [],
         },
         'requests': {'install': [], 'uninstall': []},
         'apps': apps,
-        'packages': packages,
+        'packages': packages_by_name,
     }
     out = repo / 'index-v1.json'
     out.write_text(json.dumps(index, indent=1, ensure_ascii=False) + '\n')
